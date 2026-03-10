@@ -1,0 +1,32 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        double temperatura;
+        int presion;
+
+        Console.Write("Temperatura: ");
+        temperatura = double.Parse(Console.ReadLine());
+
+        Console.Write("Presion: ");
+        presion = int.Parse(Console.ReadLine());
+
+        if (temperatura > 39 || presion > 180)
+        {
+            Console.WriteLine("TRIAJE: ROJO (Critico)");
+            Console.WriteLine("Atencion inmediata");
+        }
+        else if (temperatura > 38 || presion > 140)
+        {
+            Console.WriteLine("TRIAJE: AMARILLO (Urgente)");
+            Console.WriteLine("Atencion pronta");
+        }
+        else
+        {
+            Console.WriteLine("TRIAJE: VERDE (Estable)");
+            Console.WriteLine("Puede esperar");
+        }
+    }
+}
