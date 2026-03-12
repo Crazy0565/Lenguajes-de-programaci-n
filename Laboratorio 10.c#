@@ -1,0 +1,53 @@
+using System;
+
+class Paciente
+{
+    private string nombre;
+    private int edad;
+    private string genero;
+
+    public string Nombre
+    {
+        get { return nombre; }
+        set { nombre = value; }
+    }
+
+    public int Edad
+    {
+        get { return edad; }
+        set { edad = value; }
+    }
+
+    public string Genero
+    {
+        get { return genero; }
+        set { genero = value; }
+    }
+
+    public void MostrarPerfil()
+    {
+        Console.WriteLine("Nombre: " + nombre);
+        Console.WriteLine("Edad: " + edad);
+        Console.WriteLine("Genero: " + genero);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Paciente p1 = new Paciente();
+        p1.Nombre = "Carlos";
+        p1.Edad = 45;
+        p1.Genero = "Masculino";
+
+        Paciente p2 = new Paciente();
+        p2.Nombre = "Ana";
+        p2.Edad = 30;
+        p2.Genero = "Femenino";
+
+        p1.MostrarPerfil();
+        Console.WriteLine();
+        p2.MostrarPerfil();
+    }
+}
