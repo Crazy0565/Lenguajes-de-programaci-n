@@ -1,0 +1,44 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int filas = 4;
+        int columnas = 5;
+        string[,] matriz = new string[filas, columnas];
+
+        for (int i = 0; i < filas; i++)
+        {
+            for (int j = 0; j < columnas; j++)
+            {
+                matriz[i, j] = " ";
+            }
+        }
+
+        matriz[0, 0] = "X";
+        matriz[0, 3] = "X";
+
+        matriz[1, 1] = "X";
+        matriz[1, 2] = "X";
+
+        matriz[2, 1] = "X";
+        matriz[2, 2] = "X";
+
+        matriz[3, 0] = "X";
+        matriz[3, 3] = "X";
+
+        for (int i = 0; i < filas; i++)
+        {
+            for (int j = 0; j < columnas; j++)
+            {
+            if (matriz[i, j] == "X")
+                Console.ForegroundColor = ConsoleColor.Green; 
+            else
+                Console.ResetColor();
+                Console.Write(matriz[i, j] + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
