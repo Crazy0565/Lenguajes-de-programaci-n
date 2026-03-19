@@ -1,0 +1,39 @@
+using System;
+
+class Triangulo
+{
+    static void Main(string[] args)
+    {
+        double a, b, c;
+
+        Console.Write("Ingresa el lado A: ");
+        a = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Ingresa el lado B: ");
+        b = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Ingresa el lado C: ");
+        c = Convert.ToDouble(Console.ReadLine());
+
+        if (a <= 0 || b <= 0 || c <= 0)
+        {
+            Console.WriteLine("Los lados deben ser mayores a 0.");
+        }
+        else if ((a + b <= c) || (a + c <= b) || (b + c <= a))
+        {
+            Console.WriteLine("Estos valores no forman un triangulo adecuado.");
+        }
+        else if (a == b && b == c)
+        {
+            Console.WriteLine("Tu triangulo es Equilatero.");
+        }
+        else if (a == b || b == c || a == c)
+        {
+            Console.WriteLine("Tu triangulo es Isosceles.");
+        }
+        else
+        {
+            Console.WriteLine("Tu triangulo es Escaleno.");
+        }
+    }
+}
