@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+
+    cout << "¿Que es un lenguaje compilado?\n";
+    cout << "Es aquel cuyo código fuente se traduce directamente a código máquina (binario) mediante un compilador.\n\n";
+
+    cout << "¿Que es un lenguaje interpretado?\n";
+    cout << "Es aquel cuyo código fuente se ejecuta directamente línea por línea mediante un programa intermedio llamado intérprete, sin necesidad de una compilación previa a lenguaje máquina.\n\n";
+
+    cout << "¿A que tipo pertenece C++?\n";
+    cout << "C++ es un lenguaje compilado.\n\n";
+
+    int opcion;
+
+    cout << "Seleccione un paradigma:\n";
+    cout << "1. Estructurado\n";
+    cout << "2. Orientado a Objetos\n";
+    cout << "Opcion: ";
+    cin >> opcion;
+
+    if (opcion == 1) {
+        cout << "\nParadigma Estructurado:\n";
+        cout << "Organiza el programa en funciones y sigue una secuencia logica.\n";
+    } 
+    else if (opcion == 2) {
+        cout << "\nParadigma Orientado a Objetos:\n";
+        cout << "Organiza el programa en objetos que contienen datos y funciones.\n";
+    } 
+    else {
+        cout << "\nOpcion no valida.\n";
+    }
+
+    return 0;
+}
