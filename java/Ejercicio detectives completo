@@ -1,0 +1,503 @@
+import java.util.Scanner;
+
+// clase padre
+class Agente {
+
+    protected String id;
+    protected String nombre;
+    protected String agencia;
+    protected int edad;
+    protected String rango;
+
+    // constructor
+    public Agente(String id, String nombre, String agencia,
+            int edad, String rango) {
+
+        this.id = id;
+        this.nombre = nombre;
+        this.agencia = agencia;
+        this.edad = edad;
+        this.rango = rango;
+    }
+
+    // metodos heredables
+    public void mostrarInformacion() {
+
+        System.out.println("\n--- INFORMACIÓN DEL AGENTE ---");
+        System.out.println("Identificación: " + id);
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Comisaría: " + agencia);
+        System.out.println("Edad: " + edad);
+        System.out.println("Rango: " + rango);
+    }
+
+    public void trabajar() {
+
+        System.out.println(nombre
+                + " está investigando el caso SOMBRA OCULTA.");
+    }
+}
+
+// clase hija
+class Policia extends Agente {
+
+    protected String patrulla;
+
+    public Policia(String id, String nombre, String agencia,
+            int edad, String rango, String patrulla) {
+
+        super(id, nombre, agencia, edad, rango);
+
+        this.patrulla = patrulla;
+    }
+
+    public void arrestar(String sospechoso) {
+
+        System.out.println(nombre
+                + " arrestó a "
+                + sospechoso);
+    }
+}
+
+// clase hija
+class Forence extends Agente {
+
+    protected String especialidad;
+
+    public Forence(String id, String nombre, String agencia,
+            int edad, String rango,
+            String especialidad) {
+
+        super(id, nombre, agencia, edad, rango);
+
+        this.especialidad = especialidad;
+    }
+
+    public void analizarPruebas(String prueba) {
+
+        System.out.println(nombre
+                + " analizó la prueba: "
+                + prueba);
+    }
+}
+
+// clase independiente del expediente
+class Espia {
+
+    // atributos
+    String nombreClave;
+    String equipoSaboteado;
+    int tiempoEjecucionSeg;
+
+    // constructor
+    public Espia(String nombreClave,
+            String equipoSaboteado,
+            int tiempoEjecucionSeg) {
+
+        this.nombreClave = nombreClave;
+        this.equipoSaboteado = equipoSaboteado;
+        this.tiempoEjecucionSeg = tiempoEjecucionSeg;
+    }
+
+    // expediente
+    public void informarSabotaje() {
+
+        System.out.println(
+                "\nEl agente "
+                        + nombreClave
+                        + " saboteó el equipo "
+                        + equipoSaboteado
+                        + " en "
+                        + tiempoEjecucionSeg
+                        + " segundos.");
+    }
+}
+
+public class PrimerEjercicio {
+
+    // contadores secuenciales
+    static int contadorAgente = 1;
+    static int contadorPolicia = 1;
+    static int contadorForence = 1;
+
+    public static void main(String[] args) {
+
+        Scanner teclado = new Scanner(System.in);
+
+        System.out.println("================================");
+        System.out.println("   AGENCIA SECRETA DE DETECTIVES");
+        System.out.println("         Caso: SOMBRA OCULTA");
+        System.out.println("================================");
+
+        System.out.println("¡Hola detective!");
+
+        System.out.print("¿Cuál es tu nombre? ");
+        String nombreJugador = teclado.nextLine();
+
+        System.out.print(
+                "Antes de continuar, confirmemos ¿Cuántos años tienes? ");
+
+        int edadJugador = teclado.nextInt();
+        teclado.nextLine();
+
+        if (edadJugador < 12) {
+
+            System.out.println(
+                    "Vuelve cuando tengas la edad suficiente.");
+
+            return;
+        }
+
+        if (edadJugador >= 60) {
+
+            System.out.println("¡Feliz retiro!");
+
+            return;
+        }
+
+        System.out.println("\n--- REGISTRO DEL AGENTE ---");
+
+        System.out.println("1. Agente");
+        System.out.println("2. Policía");
+        System.out.println("3. Forence");
+
+        System.out.print("Selecciona tu tipo: ");
+
+        int tipo = teclado.nextInt();
+        teclado.nextLine();
+
+        String idGenerado;
+
+        // ids secuenciales
+        if (tipo == 1) {
+
+            idGenerado = "AGENT"
+                    + String.format("%04d",
+                            contadorAgente);
+
+            contadorAgente++;
+
+        } else if (tipo == 2) {
+
+            idGenerado = "POL"
+                    + String.format("%04d",
+                            contadorPolicia);
+
+            contadorPolicia++;
+
+        } else {
+
+            idGenerado = "FOREN"
+                    + String.format("%04d",
+                            contadorForence);
+
+            contadorForence++;
+        }
+
+        String comisaria = "Comisaría Central";
+
+        System.out.print("Ingresa tu rango: ");
+
+        String rangoJugador = teclado.nextLine();
+
+        Agente agenteJugador = null;
+
+        Policia policia1 = null;
+
+        Forence forence1 = null;
+
+        // registro segun el tipo
+        if (tipo == 1) {
+
+            agenteJugador = new Agente(
+                    idGenerado,
+                    nombreJugador,
+                    comisaria,
+                    edadJugador,
+                    rangoJugador);
+
+        } else if (tipo == 2) {
+
+            System.out.print("Ingresa tu patrulla: ");
+
+            String patrulla = teclado.nextLine();
+
+            policia1 = new Policia(
+                    idGenerado,
+                    nombreJugador,
+                    comisaria,
+                    edadJugador,
+                    rangoJugador,
+                    patrulla);
+
+            agenteJugador = policia1;
+
+        } else {
+
+            System.out.print(
+                    "Ingresa tu especialidad forense: ");
+
+            String especialidad = teclado.nextLine();
+
+            forence1 = new Forence(
+                    idGenerado,
+                    nombreJugador,
+                    comisaria,
+                    edadJugador,
+                    rangoJugador,
+                    especialidad);
+
+            agenteJugador = forence1;
+        }
+
+        // mostrar datos
+        agenteJugador.mostrarInformacion();
+
+        agenteJugador.trabajar();
+
+        String[] sospechosos = {
+                "Victoria Mendoza",
+                "Aurelio Vásquez",
+                "Bruno",
+                "Simón Quiroga"
+        };
+
+        System.out.println(
+                "\nTenemos 4 posibles sospechosos:");
+
+        for (int i = 0; i < sospechosos.length; i++) {
+
+            System.out.println(
+                    (i + 1)
+                            + ". "
+                            + sospechosos[i]);
+        }
+
+        System.out.print(
+                "\n¿Quién crees que es el culpable?: ");
+
+        int sospechosoElegido = teclado.nextInt();
+        teclado.nextLine();
+
+        int pistas = 0;
+
+        int opcion;
+
+        boolean casoResuelto = false;
+
+        boolean acusado = false;
+
+        // objeto del espía
+        Espia espia = new Espia(
+                "Tornado Silente",
+                "Servidor Central",
+                45);
+
+        System.out.println(
+                "\nTu misión es resolver el caso.");
+
+        do {
+
+            System.out.println("\n--- MENU ---");
+
+            System.out.println("1. Buscar pistas");
+            System.out.println("2. Interrogar sospechosos");
+            System.out.println("3. Acusar sospechoso");
+            System.out.println("4. Respuesta del caso");
+            System.out.println("5. Intervenir comunicaciones");
+
+            System.out.print(
+                    "Elige una opción: ");
+
+            opcion = teclado.nextInt();
+            teclado.nextLine();
+
+            switch (opcion) {
+
+                case 1:
+
+                    if (pistas == 4) {
+
+                        System.out.println(
+                                "Ya no hay más pistas.");
+
+                        break;
+                    }
+
+                    String[] evidencias = {
+                            "Huella digital en la ventana",
+                            "Copa de vino con residuos",
+                            "Nota rasgada en el escritorio",
+                            "Cuchillo en la cocina"
+                    };
+
+                    String decision = "si";
+
+                    int i = pistas;
+
+                    while (i < evidencias.length
+                            && decision.equals("si")) {
+
+                        System.out.println(
+                                "\nPista "
+                                        + (i + 1)
+                                        + ": "
+                                        + evidencias[i]);
+
+                        // funcion del forense
+                        if (forence1 != null) {
+
+                            forence1.analizarPruebas(
+                                    evidencias[i]);
+                        }
+
+                        pistas++;
+
+                        if (i < evidencias.length - 1) {
+
+                            System.out.print(
+                                    "¿Buscar otra pista? (si/no): ");
+
+                            decision = teclado.nextLine();
+
+                        } else {
+
+                            System.out.println(
+                                    "No hay más pistas.");
+                        }
+
+                        i++;
+                    }
+
+                    break;
+
+                case 2:
+
+                    System.out.println(
+                            "\n¿A quién deseas interrogar?");
+
+                    for (int j = 0;
+                            j < sospechosos.length;
+                            j++) {
+
+                        System.out.println(
+                                (j + 1)
+                                        + ". "
+                                        + sospechosos[j]);
+                    }
+
+                    System.out.print(
+                            "Elige una opción: ");
+
+                    int elegido = teclado.nextInt();
+                    teclado.nextLine();
+
+                    System.out.println(
+                            "\nSospechoso: "
+                                    + sospechosos[elegido - 1]);
+
+                    if (elegido == 1) {
+
+                        System.out.println(
+                                "Coartada: Veía televisión.");
+
+                    } else if (elegido == 2) {
+
+                        System.out.println(
+                                "Coartada: Revisaba documentos.");
+
+                    } else if (elegido == 3) {
+
+                        System.out.println(
+                                "Coartada: Compraba comida.");
+
+                    } else {
+
+                        System.out.println(
+                                "Coartada: Estaba dormido.");
+                    }
+
+                    break;
+
+                case 3:
+
+                    if (pistas < 3) {
+
+                        System.out.println(
+                                "Necesitas mínimo 3 pistas.");
+
+                        break;
+                    }
+
+                    System.out.println(
+                            "\nAcusando sospechoso...");
+
+                    // funcion del policia
+                    if (policia1 != null) {
+
+                        policia1.arrestar(
+                                sospechosos[sospechosoElegido - 1]);
+                    }
+
+                    acusado = true;
+
+                    if (sospechosos[sospechosoElegido - 1]
+                            .equals("Aurelio Vásquez")) {
+
+                        System.out.println("¡Correcto!");
+
+                        System.out.println(
+                                "Has resuelto el caso.");
+
+                        casoResuelto = true;
+
+                    } else {
+
+                        System.out.println("Fallaste.");
+                    }
+
+                    break;
+
+                case 4:
+
+                    if (!acusado) {
+
+                        System.out.println(
+                                "Primero debes acusar.");
+
+                        break;
+                    }
+
+                    System.out.println(
+                            "\n--- RESPUESTA DEL CASO ---");
+
+                    System.out.println(
+                            "El culpable era Aurelio Vásquez.");
+
+                    System.out.println("Caso cerrado.");
+
+                    casoResuelto = true;
+
+                    break;
+
+                case 5:
+
+                    espia.informarSabotaje();
+
+                    break;
+
+                default:
+
+                    System.out.println(
+                            "Opción inválida.");
+
+                    break;
+            }
+
+        } while (!casoResuelto);
+
+        System.out.println("\nFin del juego.");
+
+        teclado.close();
+    }
+}
